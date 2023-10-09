@@ -1,0 +1,42 @@
+I have used MS Visual Studio 2022 as an IDE with C++ 14 as a language standard for this exercise.
+
+Load the "lidya-technical-assessment file in Visual Studio. 
+
+Please select the OrderBook project and set the project as the "active project" , then select build and run. 
+
+A number of tests which process various events and ensure the requirements are met will 
+run (Add and delete orders - ensuring ordering is maintained) and fetching top 4 prices. 
+
+Assumptions
+
+1) input (updates/ticks) arrives as a stream of strings with comma separated entries (irrespective of source: CSV, socket, file). 
+
+2) The tokens that make up an update string are at fixed positions in the string irrespective of the action (Add, DELETE, EXECUTE).
+when a field is not relevant for a give action like the price field in the DELETE action, the price field will still be in 
+the input and will be set to 0
+
+3) The unique Id is validated such that its length is 16 and only contains alphanumeric characters.
+
+4) I used a multiset to store the orders by price in descending order (the highest price first) and when prices are the same use the time 
+of arrival to sort 2 orders. This offers good performance with (Olog(n)) for insertions and deletion. A set is better suited than hash maps
+when repeatedly inserting and removing elements hashing + bucketing adds up(which is what’s expected with order books). 
+I also use a map with the Id as a key. This is to enable the deletion of orders by Id. Using a the same multiset would be suboptimal 
+as it would require walking the entire set (the set is keyed by price and time and NOT the Id)
+A drawback of using a set is locality of reference as the underlying data structure is not stored in contiguous 
+memory (unlike vectors). This will cause suboptimal L1 and L2 cache usage.
+
+5) I could have used a map keyed by the price to a vector of orders which could have been made to be sorted in descending order (obviously default is ascending)and then use reverse iterators to get the best prices (i.e lowest prices). 
+The issue here would have been the deletion of Orders by ID as it would have required walking the map and going through the orders which is 
+inefficient.
+MultiIndex maps (similar to the one provided by Boost) with 2 keys: Order Id and Price into the data structure would have been an option but I did not investigate this further and stuck to what stl provides.
+
+6) Execution updates, I assumed that those will remain in the book but will marked as "EXECUTED" and their amount adjusted to the amount
+received in the EXECUTE command which distinguishes it from the "Delete" event which causes the relevant order entry to be removed 
+from the book.
+
+7) QueuePosition. Orders are stored by price, I assume that when those order are filled (actual matching and filling of orders is not part of this exercise), they are removed from the book and therefor the order presented to the function will move to the top of the queue.
+So the implementation adds up the amounts of in the orders that sit above (assume orders with larger pricesd are filled first) 
+the presented one in the data structure.
+
+8) The test code could be made more generic so that instead of harcoding order ids they are parameterised but existing ones demonstrate  
+that the code works correctly.
