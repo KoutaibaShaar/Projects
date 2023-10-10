@@ -1,9 +1,9 @@
 ﻿  LockFreeQueue.cpp
-C:\Users\kouta\OneDrive\ConsoleApplication1\LockFreeQueue\LockFreeQueue.cpp(264,10): warning C4101: 'foo': unreferenced local variable
-C:\Users\kouta\OneDrive\ConsoleApplication1\LockFreeQueue\LockFreeQueue.cpp(399,35): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
-C:\Users\kouta\OneDrive\ConsoleApplication1\LockFreeQueue\LockFreeQueue.cpp(441,9): message : see reference to function template instantiation 'message<CustomMsgTypes> &operator <<<int>(message<CustomMsgTypes> &,const DataType &)' being compiled
+C:\Users\kouta\OneDrive\ConsoleApplication1\LockFreeQueue\LockFreeQueue.cpp(266,10): warning C4101: 'foo': unreferenced local variable
+C:\Users\kouta\OneDrive\ConsoleApplication1\LockFreeQueue\Net_Message.h(45,35): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+C:\Users\kouta\OneDrive\ConsoleApplication1\LockFreeQueue\LockFreeQueue.cpp(376,9): message : see reference to function template instantiation 'message<CustomMsgTypes> &operator <<<int>(message<CustomMsgTypes> &,const DataType &)' being compiled
           with
           [
               DataType=int
           ]
-C:\Users\kouta\OneDrive\ConsoleApplication1\LockFreeQueue\LockFreeQueue.cpp(441,24): message : see the first reference to 'operator <<' in 'main'
+C:\Users\kouta\OneDrive\ConsoleApplication1\LockFreeQueue\LockFreeQueue.cpp(376,24): message : see the first reference to 'operator <<' in 'main'

@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="LockFreeQueue.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Net_Message.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
